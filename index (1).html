@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anna Cha — Data Science Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1a2e; --ink-soft: #4a4a6a; --ink-muted: #8888aa;
+      --bg: #faf9f7; --bg-card: #ffffff; --accent: #2d6a4f;
+      --border: rgba(26,26,46,0.10); --tag-bg: #f0ede8; --tag-text: #4a4a6a;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--bg); color: var(--ink); line-height: 1.7; font-size: 16px; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(250,249,247,0.90); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav-name { font-family: 'DM Serif Display', serif; font-size: 17px; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 400; letter-spacing: 0.03em; color: var(--ink-soft); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero { max-width: 860px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+    .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: 1.08; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.5rem; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-bio { max-width: 560px; font-size: 17px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 2rem; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem; }
+    .chip { font-size: 12px; font-weight: 400; letter-spacing: 0.02em; background: var(--tag-bg); color: var(--tag-text); border-radius: 100px; padding: 5px 14px; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-block; font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 100px; text-decoration: none; transition: all 0.2s; }
+    .btn-primary { background: var(--ink); color: #fff; }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--ink-soft); background: transparent; }
+    .btn-ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
+
+    section { max-width: 860px; margin: 0 auto; padding: 3.5rem 2rem; }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 2rem; display: flex; align-items: center; gap: 12px; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.25rem; }
+    .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; display: flex; flex-direction: column; transition: box-shadow 0.2s, transform 0.2s; text-decoration: none; color: inherit; }
+    .project-card:hover { box-shadow: 0 8px 32px rgba(26,26,46,0.08); transform: translateY(-2px); }
+    .card-accent-bar { height: 3px; border-radius: 2px; margin-bottom: 1.25rem; }
+    .bar-green  { background: #2d6a4f; }
+    .bar-purple { background: #7b5ea7; }
+    .bar-amber  { background: #c77c2f; }
+    .bar-coral  { background: #d05050; }
+    .card-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem; color: var(--ink-muted); }
+    .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.25rem; line-height: 1.3; margin-bottom: 0.75rem; color: var(--ink); }
+    .project-card p { font-size: 14px; line-height: 1.65; color: var(--ink-soft); flex: 1; margin-bottom: 1.25rem; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .card-tags span { font-size: 11px; padding: 3px 10px; border-radius: 100px; background: var(--tag-bg); color: var(--tag-text); }
+    .card-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 1.25rem; font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; transition: gap 0.15s; }
+    .card-link:hover { gap: 10px; }
+    .card-link::after { content: '→'; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .work-item { margin-bottom: 1.75rem; }
+    .work-item:last-child { margin-bottom: 0; }
+    .work-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.3rem; }
+    .work-title { font-weight: 500; font-size: 15px; }
+    .work-date { font-size: 12px; color: var(--ink-muted); white-space: nowrap; }
+    .work-org { font-size: 13px; color: var(--accent); margin-bottom: 0.4rem; }
+    .work-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+
+    .skills-block h4 { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin: 1.25rem 0 0.6rem; }
+    .skills-block h4:first-child { margin-top: 0; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-pill { font-size: 12px; padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border); color: var(--ink-soft); }
+
+    .contact-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+    .contact-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-soft); text-decoration: none; padding: 8px 16px; border: 1px solid var(--border); border-radius: 100px; transition: all 0.2s; }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    footer { text-align: center; padding: 3rem 2rem; font-size: 12px; color: var(--ink-muted); border-top: 1px solid var(--border); }
+
+    @media (max-width: 640px) {
+      .hero { padding: 4rem 1.5rem 3rem; }
+      section { padding: 2.5rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#">Anna Cha</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Statistics & Data Science · UC Santa Barbara · Class of 2027</p>
+  <h1>Turning data into<br /><em>insight & action</em></h1>
+  <p class="hero-bio">I build statistical models, data pipelines, and interactive dashboards that help organizations understand what their data is really saying.</p>
+  <div class="hero-chips">
+    <span class="chip">R · Python</span>
+    <span class="chip">R Shiny</span>
+    <span class="chip">Tableau · Power BI</span>
+    <span class="chip">Predictive Modeling</span>
+    <span class="chip">NLP</span>
+    <span class="chip">ArcGIS</span>
+    <span class="chip">Git / GitHub</span>
+  </div>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="https://github.com/YOUR_USERNAME" target="_blank">GitHub</a>
+    <a class="btn btn-ghost" href="https://www.linkedin.com/in/anna-cha" target="_blank">LinkedIn</a>
+    <a class="btn btn-ghost" href="#projects">View Projects ↓</a>
+  </div>
+</div>
+
+<section id="projects">
+  <p class="section-label">Selected Projects</p>
+  <div class="projects-grid">
+
+    <a class="project-card" href="https://github.com/owen2608/AIIndustryProject" target="_blank">
+      <div class="card-accent-bar bar-green"></div>
+      <p class="card-tag">Machine Learning · NLP · Python</p>
+      <h3>Craving Recommendation System</h3>
+      <p>A hybrid restaurant recommendation engine trained on 562,000+ Yelp reviews across 7,600 Philadelphia restaurants. Combines item-based collaborative filtering with content embeddings so users can describe cravings in plain language — "something warm and comforting" — and receive personalized results.</p>
+      <div class="card-tags">
+        <span>Collaborative Filtering</span><span>Text Embeddings</span>
+        <span>sklearn</span><span>pandas</span><span>scipy.sparse</span>
+      </div>
+      <span class="card-link">View on GitHub</span>
+    </a>
+
+    <a class="project-card" href="#" target="_blank">
+      <div class="card-accent-bar bar-purple"></div>
+      <p class="card-tag">EDA · Statistical Modeling · R</p>
+      <h3>Post-Class 12 Dropout Risk Analysis</h3>
+      <p>Investigated which factors — family income, parental education, or study habits — most predict dropout after India's Class 12 JEE exams. Used logistic regression and Welch's two-sample t-tests across a synthetic dataset of 5,000 students, with predicted probability visualizations in R.</p>
+      <div class="card-tags">
+        <span>Logistic Regression</span><span>Welch's t-test</span>
+        <span>ggplot2</span><span>ggeffects</span><span>Quarto</span>
+      </div>
+      <span class="card-link">View on GitHub</span>
+    </a>
+
+    <a class="project-card" href="#" target="_blank">
+      <div class="card-accent-bar bar-amber"></div>
+      <p class="card-tag">Policy Analysis · ArcGIS · Data Visualization</p>
+      <h3>Richmond, Virginia's Housing Crisis</h3>
+      <p>Examined investor-driven displacement, redlining legacy, and affordability collapse in Richmond — where home prices surged 52.6% in five years and eviction rates run nearly 3× the national average. Combined ArcGIS displacement mapping with Rosen-Roback economic analysis to propose data-backed policy interventions.</p>
+      <div class="card-tags">
+        <span>ArcGIS</span><span>Policy Analysis</span>
+        <span>Urban Economics</span><span>Data Storytelling</span>
+      </div>
+      <span class="card-link">View on GitHub</span>
+    </a>
+
+    <a class="project-card" href="#" target="_blank">
+      <div class="card-accent-bar bar-coral"></div>
+      <p class="card-tag">Research · Mixed Methods · R</p>
+      <h3>INSPIRE — Peer Mentoring & Student Persistence</h3>
+      <p>Longitudinal pre/post visualizations and change-score regression models examining how mentor trust and social capital predict shifts in student belonging and retention intent. Coded 600+ student reflections using the Gioia method; contributing to an ASEE conference paper integrating quantitative survey and qualitative data.</p>
+      <div class="card-tags">
+        <span>Longitudinal Analysis</span><span>Change-Score Regression</span>
+        <span>Gioia Method</span><span>ggplot2</span><span>ASEE</span>
+      </div>
+      <span class="card-link">View on GitHub</span>
+    </a>
+
+  </div>
+</section>
+
+<section id="experience">
+  <p class="section-label">Experience & Skills</p>
+  <div class="two-col">
+    <div>
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-title">Undergraduate Research Assistant</span>
+          <span class="work-date">Mar 2026 – Present</span>
+        </div>
+        <p class="work-org">UCSB College of Engineering · INSPIRE Group</p>
+        <p class="work-desc">Longitudinal visualizations and regression models on peer mentoring outcomes; Gioia qualitative coding of 600+ reflections; co-author on ASEE conference paper.</p>
+      </div>
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-title">Analytics Assistant</span>
+          <span class="work-date">Feb 2026 – Present</span>
+        </div>
+        <p class="work-org">UCSB Library · Collection Strategies Department</p>
+        <p class="work-desc">Automated data cleaning and reporting in R/Python; designed R Shiny and Tableau dashboards for collection usage and acquisition trends.</p>
+      </div>
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-title">Financial Operations Systems Associate</span>
+          <span class="work-date">May 2024 – Present</span>
+        </div>
+        <p class="work-org">Associated Students, UCSB</p>
+        <p class="work-desc">Implemented MIP/Microix Cloud financial system — workflow design, application configuration, and community rollout for A.S. financial operations.</p>
+      </div>
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-title">CS & Statistics Learning Assistant</span>
+          <span class="work-date">Jul – Dec 2024</span>
+        </div>
+        <p class="work-org">MAX Program, UCSB</p>
+        <p class="work-desc">Mentored first-year students transitioning to UCSB; facilitated study sessions for CS and Statistics coursework.</p>
+      </div>
+    </div>
+
+    <div class="skills-block">
+      <h4>Languages</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">R</span>
+        <span class="skill-pill">Python</span>
+      </div>
+      <h4>Tools & Platforms</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">R Shiny</span>
+        <span class="skill-pill">Tableau</span>
+        <span class="skill-pill">Power BI</span>
+        <span class="skill-pill">ArcGIS</span>
+        <span class="skill-pill">Excel</span>
+        <span class="skill-pill">Jupyter Notebook</span>
+        <span class="skill-pill">Git / GitHub</span>
+        <span class="skill-pill">Quarto</span>
+      </div>
+      <h4>Methods</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">Predictive Modeling</span>
+        <span class="skill-pill">EDA</span>
+        <span class="skill-pill">Cross-Validation</span>
+        <span class="skill-pill">Data Cleaning & Visualization</span>
+        <span class="skill-pill">NLP</span>
+        <span class="skill-pill">Qualitative Coding</span>
+        <span class="skill-pill">Automated Pipelines</span>
+      </div>
+      <h4>Relevant Coursework</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">Data Mining for Business</span>
+        <span class="skill-pill">AI in Industry</span>
+        <span class="skill-pill">Maps & Spatial Reasoning</span>
+      </div>
+      <h4>Education</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">B.S. Statistics & Data Science</span>
+        <span class="skill-pill">UCSB · Class of 2027</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <p style="font-size: 17px; color: var(--ink-soft); max-width: 480px; margin-bottom: 0.5rem;">Open to data science internships, research collaborations, and interesting problems.</p>
+  <div class="contact-row">
+    <a class="contact-link" href="mailto:annacha1144@gmail.com">✉ annacha1144@gmail.com</a>
+    <a class="contact-link" href="https://www.linkedin.com/in/anna-cha" target="_blank">LinkedIn</a>
+    <a class="contact-link" href="https://github.com/aanna1144" target="_blank">GitHub</a>
+  </div>
+</section>
+
+<footer>Built with HTML · Hosted on GitHub Pages · Anna Cha © 2025</footer>
+
+</body>
+</html>
